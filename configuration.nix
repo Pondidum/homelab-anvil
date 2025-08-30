@@ -69,6 +69,7 @@
         outputsToInstall = [ "terminfo" ];
       };
     }))
+    pkgs.opentofu
   ];
   
   services = {
@@ -121,7 +122,7 @@
     incus = {
       enable = true;
       ui.enable = true;
-      package = pkgs.incus-lts;
+      package = pkgs.incus;
       preseed = {
         networks = [
           {
