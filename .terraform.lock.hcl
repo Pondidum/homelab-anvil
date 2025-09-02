@@ -1,27 +1,7 @@
-# This file is maintained automatically by "terraform init".
+# This file is maintained automatically by "tofu init".
 # Manual edits may be lost in future updates.
 
 provider "registry.opentofu.org/lxc/incus" {
-  version = "0.4.0"
-  hashes = [
-    "h1:mdmW5wAt79ZrQhn7JqfbtMgp2kRWG6HAAXSVumhb3EE=",
-    "zh:1fb2a17e68cc5ed93ade791a2fd3190af49abe5b70a45de8514fcf7799acef71",
-    "zh:46aea05e0ee86b9476e9264186dac25b2ae1e78d742f0b1600887adc904554b0",
-    "zh:50c2910bb612e708757062512a7c9019ceacad373b3fc894c90aa58832e864f8",
-    "zh:5b92bdd007732e666c1e8972e0cd31d38bbfa341c8fb3c90084a4d9b235408dd",
-    "zh:69350b3c1622fa5a5c131a6e3ca978880566fed52aa13e6ff22b06fd389d9ee8",
-    "zh:b7395f6c075a1047400ffdbe18ca0e3280a83990dc1207aad0182db14536ff64",
-    "zh:b8f5b971cd1118602e6c4e6091409333486a8164545c74773632944928d1a23c",
-    "zh:bc6e1b61212d76886d13efe9be50ab8b14b824a1b835cb468024c2c3d7f54fc6",
-    "zh:c4666d8e9f4fbb4649f3aa7e1030dad3d023f0734866f6a93dc416d7f2249ea6",
-    "zh:c6c6ffb815e5aa9d5ac02b9d11c3b02348431a9a470907003370c84659161701",
-    "zh:ca57f0ff23758d6e0ce4e25c02063679c608c0d583d2d39c371d203e0c54edd8",
-    "zh:e8e665d35a02e687d6ba002b933da116fe0efac0f781045e7a954ab768e4ed08",
-    "zh:eb129111e63af6be4809e59315d7e03e281b70946fe54642a33b6563e89d3d8f",
-  ]
-}
-
-provider "registry.terraform.io/lxc/incus" {
   version     = "0.4.0"
   constraints = "0.4.0"
   hashes = [
