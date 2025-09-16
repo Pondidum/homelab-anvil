@@ -1,0 +1,31 @@
+{
+  "storage":{
+      "rootDirectory":"/var/lib/registry"
+  },
+  "http":{
+      "address":"0.0.0.0",
+      "port":"5000",
+      "compat": ["docker2s2"],
+      "tls": {
+          "cert": "/etc/anvil/certificates/anvil.pem",
+          "key": "/etc/anvil/certificates/anvil.key"
+      }
+  },
+  "log":{
+      "level":"debug"
+  },
+  "extensions": {
+    "search": {
+        "enable": true,
+        "cve": {
+            "updateInterval": "2h"
+        }
+    },
+    "ui": {
+        "enable": true
+    },
+    "mgmt": {
+      "enable": true
+    }
+  }
+}

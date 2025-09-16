@@ -70,8 +70,12 @@
       };
     }))
     pkgs.opentofu
+    pkgs.ripgrep
+    pkgs.dig
+    pkgs.certbot-full
+    pkgs.mkcert
   ];
-  
+
   services = {
     zfs = {
       autoScrub.enable = true;
@@ -89,6 +93,10 @@
       };
     };
   };
+
+  security.pki.certificateFiles = [
+    /home/andy/.local/share/mkcert/rootCA.pem
+  ];
 
   home-manager.users.andy = { pkgs, ... }: {
     home.packages = with pkgs; [ ];

@@ -19,6 +19,16 @@ resource "incus_instance" "zot" {
     }
   }
 
+  device {
+    name = "certificates"
+    type = "disk"
+    properties = {
+      path = "/etc/anvil/certificates"
+      source = incus_storage_volume.certificates.name
+      pool = "tank"
+    }
+  }
+
   # used for seeding images externally, before the loadbalancer exists
   device {
     name = "ingress-5000"
@@ -27,5 +37,10 @@ resource "incus_instance" "zot" {
       listen = "tcp:0.0.0.0:5000"
       connect = "tcp:127.0.0.1:5000"
     }
+  }
+
+  file {
+    content = file("./zot.json")
+    target_path = "/etc/zot/config.json"
   }
 }
