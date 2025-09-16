@@ -3,6 +3,10 @@ remotes:
     addr: https://ghcr.io
     protocol: oci
     public: true
+  zot:
+    addr: https://localhost:5000
+    protocol: oci
+    public: true
   images:
     addr: https://images.linuxcontainers.org
     protocol: simplestreams
