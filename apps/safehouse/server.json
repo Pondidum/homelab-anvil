@@ -1,0 +1,8 @@
+{
+  "seal": {
+    "static": {
+      "current_key_id": "unseal-2025.09.18",
+      "current_key": "file:///safehouse/unseal-2025.09.18.key"
+    }
+  }
+}
