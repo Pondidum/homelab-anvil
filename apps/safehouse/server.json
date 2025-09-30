@@ -4,8 +4,9 @@
 
   "listener": {
     "tcp": {
-      "tls_disable": true,
-      "address": "0.0.0.0:8200"
+      "address": "0.0.0.0:8200",
+      "tls_cert_file": "/etc/anvil/certificates/anvil.pem",
+      "tls_key_file": "/etc/anvil/certificates/anvil.key"
     }
   },
 

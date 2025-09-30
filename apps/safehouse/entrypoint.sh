@@ -14,4 +14,5 @@ if ! [ -f "${seal_file}" ]; then
   openssl rand -out "${seal_file}" 32
 fi
 
+chown openbao:openbao /safehouse
 exec /usr/local/bin/docker-entrypoint.sh "$@"
