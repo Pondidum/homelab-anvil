@@ -2,5 +2,6 @@ FROM openbao/openbao:2.4.1
 
 RUN apk add openssl jq
 COPY entrypoint.sh /bin/entrypoint.sh
+COPY server.json /openbao/config/
 
 ENTRYPOINT ["/bin/entrypoint.sh"]

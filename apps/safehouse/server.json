@@ -1,8 +1,25 @@
 {
+  "ui": true,
+  "api_addr": "http://0.0.0.0:8200",
+
+  "listener": {
+    "tcp": {
+      "tls_disable": true,
+      "address": "0.0.0.0:8200"
+    }
+  },
+
+  "disable_mlock": true,
+  "storage": {
+    "file": {
+      "path": "/safehouse/storage"
+    }
+  },
+
   "seal": {
     "static": {
       "current_key_id": "unseal-2025.09.18",
-      "current_key": "file:///safehouse/unseal-2025.09.18.key"
+      "current_key": "file:///safehouse/unseal/unseal-2025.09.18.key"
     }
   }
 }

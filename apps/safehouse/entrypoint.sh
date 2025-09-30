@@ -9,6 +9,8 @@ if ! [ -f "${seal_file}" ]; then
   echo "==> Generating unseal key"
   echo "    Key path: ${seal_file}"
 
+  mkdir -p "$(dirname "${seal_file}")"
+
   openssl rand -out "${seal_file}" 32
 fi
 
