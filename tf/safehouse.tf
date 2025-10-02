@@ -42,3 +42,18 @@ resource "incus_instance" "safehouse" {
     }
   }
 }
+
+
+resource "vault_mount" "kv" {
+  path = "kv"
+  type = "kv-v2"
+  description = "generic secrets"
+  options = {
+    version = "2"
+    type = "kv-v2"
+  }
+
+  depends_on = [
+    incus_instance.safehouse
+  ]
+}
