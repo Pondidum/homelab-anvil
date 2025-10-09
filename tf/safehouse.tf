@@ -57,3 +57,28 @@ resource "vault_mount" "kv" {
     incus_instance.safehouse
   ]
 }
+
+resource "vault_auth_backend" "apps" {
+  type = "approle"
+
+  depends_on = [
+    incus_instance.safehouse
+  ]
+}
+
+resource "vault_policy" "apps" {
+  name = "app"
+  policy = <<EOT
+path "kv/data/apps/{{identity.entity.aliases.${vault_auth_backend.apps.accessor}.metadata.role_name}}/*" {
+  capabilities = ["create", "update", "patch", "read", "delete", "list"]
+}
+
+path "kv/data/external/*" {
+  capabilities = ["create", "update", "patch", "read", "delete", "list"]
+}
+
+path "kv/metadata/*" {
+  capabilities = ["read", "list"]
+}
+EOT
+}
