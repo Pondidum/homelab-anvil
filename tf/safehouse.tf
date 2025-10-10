@@ -32,7 +32,6 @@ resource "incus_instance" "safehouse" {
     }
   }
 
-  # used for seeding images externally, before the loadbalancer exists
   device {
     name = "ingress-8200"
     type = "proxy"

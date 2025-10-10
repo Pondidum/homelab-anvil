@@ -18,24 +18,12 @@ resource "incus_instance" "lb" {
   }
 
   config = {
-    "environment.VAULT_TOKEN" =vault_approle_auth_backend_login.lb.client_token
+    "environment.VAULT_TOKEN" = module.safehouse_access_lb.token
   }
 }
 
-
-resource "vault_approle_auth_backend_role" "lb" {
+module "safehouse_access_lb" {
+  source = "./modules/safehouse_access"
   backend = vault_auth_backend.apps.path
-  role_name = "lb"
-  token_policies = [ "default" , vault_policy.apps.name ]
-}
-
-resource "vault_approle_auth_backend_role_secret_id" "lb" {
-  backend = vault_auth_backend.apps.path
-  role_name = vault_approle_auth_backend_role.lb.role_name
-}
-
-resource "vault_approle_auth_backend_login" "lb" {
-  backend = vault_auth_backend.apps.path
-  role_id = vault_approle_auth_backend_role.lb.role_id
-  secret_id = vault_approle_auth_backend_role_secret_id.lb.secret_id
+  app_name = "lb"
 }
