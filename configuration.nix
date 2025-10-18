@@ -130,7 +130,15 @@
     incus = {
       enable = true;
       ui.enable = true;
-      package = pkgs.incus;
+      package = pkgs.incus.overrideAttrs (finalAttrs: previousAttrs: {
+        pname = previousAttrs.pname + "-patched";
+        patches =
+          previousAttrs.patches
+          ++ [
+            ./patches/incus.patch # revert "oci improvements" https://github.com/lxc/incus/pull/1873
+          ];
+        }
+      );
       preseed = {
         networks = [
           {

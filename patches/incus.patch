@@ -1,0 +1,45 @@
+diff --git a/internal/server/instance/drivers/driver_lxc.go b/internal/server/instance/drivers/driver_lxc.go
+index 8b974f5a7..0d0ec498c 100644
+--- a/internal/server/instance/drivers/driver_lxc.go
++++ b/internal/server/instance/drivers/driver_lxc.go
+@@ -2817,39 +2817,8 @@ func (d *lxc) Start(stateful bool) error {
+ 
+ 	name := project.Instance(d.Project().Name, d.name)
+ 
+-	// Setup minimal environment for forkstart.
+-	envDict := map[string]string{
+-		"container": "lxc",
+-	}
+-
+-	for k, v := range d.expandedConfig {
+-		after, ok := strings.CutPrefix(k, "environment.")
+-		if ok {
+-			envDict[after] = v
+-		}
+-	}
+-
+-	for _, keepEnv := range []string{"LD_LIBRARY_PATH", "INCUS_DIR", "INCUS_SOCKET"} {
+-		if os.Getenv(keepEnv) != "" {
+-			envDict[keepEnv] = os.Getenv(keepEnv)
+-		}
+-	}
+-
+-	_, ok := envDict["PATH"]
+-	if !ok {
+-		envDict["PATH"] = os.Getenv("PATH")
+-	}
+-
+-	env := make([]string, 0, len(envDict))
+-	for k, v := range envDict {
+-		env = append(env, fmt.Sprintf("%s=%s", k, v))
+-	}
+-
+ 	// Start the LXC container.
+-	_, _, err = subprocess.RunCommandSplit(
+-		context.TODO(),
+-		env,
+-		nil,
++	_, err = subprocess.RunCommand(
+ 		d.state.OS.ExecPath,
+ 		"forkstart",
+ 		name,
