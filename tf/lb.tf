@@ -1,7 +1,7 @@
 resource "incus_instance" "lb" {
   name = "lb"
   type = "container"
-  image = "zot:caddy:2.10.2-alpine"
+  image = "zot:apps/lb/caddy:2"
 
   device {
     name = "ingress-80"
@@ -12,9 +12,23 @@ resource "incus_instance" "lb" {
     }
   }
 
-  file {
-    content = file("./caddyfile")
-    target_path = "/etc/caddy/Caddyfile"
+  device {
+    name = "ingress-443"
+    type = "proxy"
+    properties = {
+      listen = "tcp:0.0.0.0:443"
+      connect = "tcp:127.0.0.1:443"
+    }
+  }
+
+  device {
+    name = "certificates"
+    type = "disk"
+    properties = {
+      path = "/etc/anvil/certificates"
+      source = incus_storage_volume.certificates.name
+      pool = "tank"
+    }
   }
 
   config = {
