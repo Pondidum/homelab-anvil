@@ -1,7 +1,7 @@
 resource "incus_instance" "lb" {
   name = "lb"
   type = "container"
-  image = "zot:apps/lb/caddy:2"
+  image = "zot:apps/lb/caddy:4"
 
   device {
     name = "ingress-80"

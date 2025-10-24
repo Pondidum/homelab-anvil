@@ -1,4 +1,4 @@
-anvil.verstas.xyz {
+*.verstas.xyz {
 	tls {
 		dns ovh {
 			endpoint "ovh-eu"
@@ -8,8 +8,14 @@ anvil.verstas.xyz {
 		}
 	}
 
-	handle {
+	@anvil host anvil.verstas.xyz
+	handle @anvil {
 		respond "hejsan?"
+	}
+
+	@safehouse host safehouse.verstas.xyz
+	handle @safehouse {
+		reverse_proxy https://safehouse.incus:8200
 	}
 }
 
