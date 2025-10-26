@@ -7,6 +7,10 @@ remotes:
     addr: https://localhost:5000
     protocol: oci
     public: true
+  docker:
+    addr: https://docker.io
+    protocol: oci
+    public: true
   images:
     addr: https://images.linuxcontainers.org
     protocol: simplestreams
