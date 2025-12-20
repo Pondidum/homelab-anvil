@@ -56,7 +56,7 @@
   time.timeZone = "Europe/Helsinki";
   console.keyMap = "uk";
   i18n.defaultLocale = "en_GB.UTF-8";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
   system.autoUpgrade = {
     enable = true;
     dates = "weekly";
@@ -100,7 +100,7 @@
 
   home-manager.users.andy = { pkgs, ... }: {
     home.packages = with pkgs; [ ];
-    home.stateVersion = "25.05";
+    home.stateVersion = "25.11";
       
     programs.helix = {
       enable = true;
@@ -130,15 +130,7 @@
     incus = {
       enable = true;
       ui.enable = true;
-      package = pkgs.incus.overrideAttrs (finalAttrs: previousAttrs: {
-        pname = previousAttrs.pname + "-patched";
-        patches =
-          previousAttrs.patches
-          ++ [
-            ./patches/incus.patch # revert "oci improvements" https://github.com/lxc/incus/pull/1873
-          ];
-        }
-      );
+      package = pkgs.incus;
       preseed = {
         networks = [
           {
