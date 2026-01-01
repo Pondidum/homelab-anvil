@@ -12,11 +12,6 @@
 	handle @anvil {
 		respond "hejsan?"
 	}
-
-	@safehouse host safehouse.verstas.xyz
-	handle @safehouse {
-		reverse_proxy https://safehouse.incus:8200
-	}
 }
 
 :80 {

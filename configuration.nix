@@ -73,6 +73,7 @@
     pkgs.ripgrep
     pkgs.dig
     pkgs.certbot-full
+    pkgs.git
     pkgs.mkcert
     pkgs.podman-tui
   ];
@@ -163,6 +164,20 @@
           ports = [ "5000:5000" ];
         };
 
+        lb = {
+          image = "localhost:5000/apps/caddy/caddy:0";
+          autoStart = true;
+          ports = [
+            "80:80"
+            "443:443"
+          ];
+          environmentFiles = [
+            "/root/containers/alb/secrets.env"
+          ];
+          volumes = [
+            "/root/containers/alb/Caddyfile:/etc/caddy/Caddyfile"
+          ];
+        };
       };
     };
   };
