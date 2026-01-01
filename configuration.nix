@@ -74,7 +74,18 @@
     pkgs.dig
     pkgs.certbot-full
     pkgs.mkcert
+    pkgs.podman-tui
   ];
+
+  environment.etc = {
+    "containers/registries.conf.d/localhost.conf" = {
+      text = ''
+        [[registry]]
+        location = "localhost:5000"
+        insecure = true
+      '';
+    };
+  };
 
   services = {
     zfs = {
@@ -127,68 +138,31 @@
   };
   
   virtualisation = {
-    incus = {
+    containers = {
       enable = true;
-      ui.enable = true;
-      package = pkgs.incus;
-      preseed = {
-        networks = [
-          {
-            name = "internalbr0";
-            type = "bridge";
-            description = "Internal/NATed bridge";
-            config = {
-              "ipv4.address" = "auto";
-              "ipv4.nat" = "true";
-              "ipv6.address" = "auto";
-              "ipv6.nat" = "true";
-            };
-          }
-        ];
-        profiles = [
-          {
-            name = "default";
-            description = "Default Incus Profile";
-            devices = {
-              eth0 = {
-                name = "eth0";
-                network = "internalbr0";
-                type = "nic";
-              };
-              root = {
-                path = "/";
-                pool = "tank";
-                type = "disk";
-              };
-            };
-          }
-          {
-            name = "bridged";
-            description = "Instances bridged to LAN";
-            devices = {
-              eth0 = {
-                name = "eth0";
-                nictype = "bridged";
-                parent = "externalbr0";
-                type = "nic";
-              };
-              root = {
-                path = "/";
-                pool = "tank";
-                type = "disk";
-              };
-            };
-          }
-        ];
-        storage_pools = [
-          {
-            name = "tank";
-            driver = "zfs";
-            config = {
-              source = "tank/incus";
-            };
-          }
-        ];
+      storage.settings.storage = {
+        driver = "zfs";
+        graphroot = "/var/lib/containers/storage";
+        runroot = "/run/containers/storage";
+      };
+    };
+    # lxd.zfsSupport = true;
+    podman = {
+      enable = true;
+      defaultNetwork.settings.dns_enabled = true;
+      extraPackages  = [ pkgs.zfs ];
+    };
+
+    oci-containers = {
+      backend = "podman";
+
+      containers = {
+        zot = {
+          image = "ghcr.io/project-zot/zot:v2.1.11";
+          autoStart = true;
+          ports = [ "5000:5000" ];
+        };
+
       };
     };
   };

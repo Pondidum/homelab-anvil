@@ -1,4 +1,0 @@
-.terraform
-terraform.tfstate*
-incus_conf/servercerts/
-incus_conf/client.*
