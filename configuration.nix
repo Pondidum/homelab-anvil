@@ -39,18 +39,7 @@
     tempAddresses = "disabled";
     nftables.enable = true;
     firewall.enable = false;
-    useDHCP = false;
-    bridges = {
-      externalbr0 = {
-        interfaces = [ "enp1s0" ];
-      };
-    };
-    interfaces = {
-      externalbr0 = {
-        useDHCP = true;
-        macAddress = "db:31:3e:f2:f1:f6";
-      };
-    };
+    useDHCP = true;
   }; 
 
   time.timeZone = "Europe/Helsinki";
