@@ -151,6 +151,10 @@
           image = "ghcr.io/project-zot/zot:v2.1.11";
           autoStart = true;
           ports = [ "0.0.0.0:5000:5000" ];
+          volumes = [
+            "/root/containers/zot/config.json:/etc/zot/config.json"
+            "/root/containers/storage/zot:/var/lib/registry"
+          ];
         };
 
         lb = {
