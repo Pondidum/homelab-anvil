@@ -165,10 +165,10 @@
             "0.0.0.0:443:443"
           ];
           environmentFiles = [
-            "/root/containers/alb/secrets.env"
+            "/root/containers/lb/secrets.env"
           ];
           volumes = [
-            "/root/containers/alb/Caddyfile:/etc/caddy/Caddyfile"
+            "/root/containers/lb/Caddyfile:/etc/caddy/Caddyfile"
           ];
         };
       };
