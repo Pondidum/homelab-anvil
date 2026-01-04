@@ -150,15 +150,15 @@
         zot = {
           image = "ghcr.io/project-zot/zot:v2.1.11";
           autoStart = true;
-          ports = [ "5000:5000" ];
+          ports = [ "0.0.0.0:5000:5000" ];
         };
 
         lb = {
           image = "localhost:5000/apps/caddy/caddy:0";
           autoStart = true;
           ports = [
-            "80:80"
-            "443:443"
+            "0.0.0.0:80:80"
+            "0.0.0.0:443:443"
           ];
           environmentFiles = [
             "/root/containers/alb/secrets.env"
