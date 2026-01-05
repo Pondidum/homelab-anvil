@@ -172,6 +172,18 @@
             "/root/containers/lb/data:/data"
           ];
         };
+
+        postgres = {
+          image = "localhost:5000/postgres:18.1-alpine";
+          autoStart = true;
+          ports = [ "0.0.0.0:5432:5432" ];
+          environmentFiles = [
+            "/root/containers/postgres/secrets.env"
+          ];
+          volumes = [
+            "/root/containers/storage/postgres:/var/lib/postgresql/"
+          ];
+        };
       };
     };
   };
