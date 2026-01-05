@@ -169,6 +169,7 @@
           ];
           volumes = [
             "/root/containers/lb/Caddyfile:/etc/caddy/Caddyfile"
+            "/root/containers/lb/data:/data"
           ];
         };
       };
