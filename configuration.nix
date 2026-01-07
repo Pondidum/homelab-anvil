@@ -184,6 +184,16 @@
             "/root/containers/storage/postgres:/var/lib/postgresql/"
           ];
         };
+
+        miniflux = {
+          image = "localhost:5000/miniflux/miniflux:2.2.15";
+          autoStart = true;
+          ports = [ "0.0.0.0:8080:8080" ];
+          environmentFiles = [
+            "/root/containers/miniflux/secrets.env"
+            "/root/containers/miniflux/variables.env"
+          ];
+        };
       };
     };
   };
