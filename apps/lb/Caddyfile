@@ -25,6 +25,15 @@
 	handle @zot {
 		reverse_proxy http://zot:5000
 	}
+
+	@miniflux host miniflux.verstas.xyz
+	handle @miniflux {
+		reverse_proxy http://miniflux:8080
+	}
+}
+
+https://miniflux.koti.sammalmaa.fi {
+  reverse_proxy http://miniflux:8080
 }
 
 :80 {
