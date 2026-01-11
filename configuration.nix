@@ -152,8 +152,8 @@
           autoStart = true;
           ports = [ "0.0.0.0:5000:5000" ];
           volumes = [
-            "/root/containers/zot/config.json:/etc/zot/config.json"
-            "/root/containers/storage/zot:/var/lib/registry"
+            "/root/apps/zot/config.json:/etc/zot/config.json"
+            "/root/apps/storage/zot:/var/lib/registry"
           ];
         };
 
@@ -165,11 +165,11 @@
             "0.0.0.0:443:443"
           ];
           environmentFiles = [
-            "/root/containers/lb/secrets.env"
+            "/root/apps/lb/secrets.env"
           ];
           volumes = [
-            "/root/containers/lb/Caddyfile:/etc/caddy/Caddyfile"
-            "/root/containers/lb/data:/data"
+            "/root/apps/lb/Caddyfile:/etc/caddy/Caddyfile"
+            "/root/apps/lb/data:/data"
           ];
         };
 
@@ -178,10 +178,10 @@
           autoStart = true;
           ports = [ "0.0.0.0:5432:5432" ];
           environmentFiles = [
-            "/root/containers/postgres/secrets.env"
+            "/root/apps/postgres/secrets.env"
           ];
           volumes = [
-            "/root/containers/storage/postgres:/var/lib/postgresql/"
+            "/root/apps/storage/postgres:/var/lib/postgresql/"
           ];
         };
 
@@ -190,8 +190,8 @@
           autoStart = true;
           ports = [ "0.0.0.0:8080:8080" ];
           environmentFiles = [
-            "/root/containers/miniflux/secrets.env"
-            "/root/containers/miniflux/variables.env"
+            "/root/apps/miniflux/secrets.env"
+            "/root/apps/miniflux/variables.env"
           ];
         };
       };
