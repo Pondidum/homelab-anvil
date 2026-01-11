@@ -36,6 +36,11 @@ https://miniflux.koti.sammalmaa.fi {
   reverse_proxy http://miniflux:8080
 }
 
+https://koti.sammalmaa.fi {
+	respond "Oletko eksynyt??"
+}
+
+
 :80 {
 	handle {
 		respond "Oletko eksynyt?"
