@@ -1,3 +1,11 @@
+{
+	log default {
+		output stdout
+		format json
+		level debug
+	}
+}
+
 *.verstas.xyz {
 	tls {
 		dns ovh {
@@ -11,6 +19,11 @@
 	@anvil host anvil.verstas.xyz
 	handle @anvil {
 		respond "hejsan?"
+	}
+
+	@zot host zot.verstas.xyz
+	handle @zot {
+		reverse_proxy http://zot:5000
 	}
 }
 
