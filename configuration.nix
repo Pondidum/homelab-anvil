@@ -58,12 +58,9 @@
         outputsToInstall = [ "terminfo" ];
       };
     }))
-    pkgs.opentofu
     pkgs.ripgrep
     pkgs.dig
-    pkgs.certbot-full
     pkgs.git
-    pkgs.mkcert
     pkgs.podman-tui
   ];
 
