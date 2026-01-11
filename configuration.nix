@@ -61,6 +61,8 @@
     pkgs.ripgrep
     pkgs.dig
     pkgs.git
+    pkgs.curl
+    pkgs.jq
     pkgs.podman-tui
   ];
 
@@ -192,6 +194,28 @@
           ];
         };
       };
+    };
+  };
+
+  systemd.timers."external-dns" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5m";
+      OnUnitActiceSec = "15m";
+      Unit = "external-dns";
+    };
+  };
+
+  systemd.services."external-dns" = {
+    script = "/bin/sh /root/apps/external-dns/external-dns.sh";
+    path = [
+      pkgs.curl
+      pkgs.jq
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      EnvironmentFile = "/root/apps/external-dns/secrets.env";
     };
   };
 
