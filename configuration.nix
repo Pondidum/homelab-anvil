@@ -201,7 +201,7 @@
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnBootSec = "5m";
-      OnUnitActiceSec = "15m";
+      OnUnitActiveSec = "15m";
       Unit = "external-dns";
     };
   };
