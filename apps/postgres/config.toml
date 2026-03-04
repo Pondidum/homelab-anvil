@@ -1,0 +1,4 @@
+unstable.host-config = true
+unstable.target-applies-to-host = true
+host.rustflags = ["-Dwarnings", "-Ctarget-feature=-crt-static"]
+build.rustflags = ["-Dwarnings", "-Ctarget-feature=-crt-static"]
