@@ -173,7 +173,7 @@
         };
 
         postgres = {
-          image = "localhost:5000/postgres:18.1-alpine";
+          image = "localhost:5000/anvil/postgres:18-vector";
           autoStart = true;
           ports = [ "0.0.0.0:5432:5432" ];
           environmentFiles = [
