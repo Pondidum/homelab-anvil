@@ -184,6 +184,15 @@
           ];
         };
 
+        valkey = {
+          image = "localhost:5000/valkey/valkey:9-alpine3.23";
+          autoStart = true;
+          ports = [ "127.0.0.1:6379:6379" ];
+          volumes = [
+            "/root/apps/storage/valkey:/cache"
+          ];
+        };
+
         miniflux = {
           image = "localhost:5000/miniflux/miniflux:2.2.15";
           autoStart = true;
