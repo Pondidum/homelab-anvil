@@ -192,6 +192,7 @@
             "/root/apps/miniflux/secrets.env"
             "/root/apps/miniflux/variables.env"
           ];
+          dependsOn = [ "postgres" ];
         };
       };
     };
