@@ -157,7 +157,7 @@
         };
 
         lb = {
-          image = "localhost:5000/apps/caddy/caddy:0";
+          image = "localhost:5000/anvil/caddy:0";
           autoStart = true;
           ports = [
             "0.0.0.0:80:80"
@@ -170,6 +170,7 @@
             "/root/apps/lb/Caddyfile:/etc/caddy/Caddyfile"
             "/root/apps/lb/data:/data"
           ];
+          dependsOn = [ "zot" ];
         };
 
         postgres = {
@@ -182,26 +183,28 @@
           volumes = [
             "/root/apps/storage/postgres:/var/lib/postgresql/"
           ];
+          dependsOn = [ "zot" ];
         };
 
         valkey = {
-          image = "localhost:5000/valkey/valkey:9-alpine3.23";
+          image = "localhost:5000/docker/valkey/valkey:9-alpine3.23";
           autoStart = true;
           ports = [ "127.0.0.1:6379:6379" ];
           volumes = [
             "/root/apps/storage/valkey:/cache"
           ];
+          dependsOn = [ "zot" ];
         };
 
         miniflux = {
-          image = "localhost:5000/miniflux/miniflux:2.2.15";
+          image = "localhost:5000/docker/miniflux/miniflux:2.2.15";
           autoStart = true;
           ports = [ "0.0.0.0:8080:8080" ];
           environmentFiles = [
             "/root/apps/miniflux/secrets.env"
             "/root/apps/miniflux/variables.env"
           ];
-          dependsOn = [ "postgres" ];
+          dependsOn = [ "zot" "postgres" ];
         };
       };
     };

@@ -1,21 +1,21 @@
 {
-  "storage":{
-      "rootDirectory": "/var/lib/registry"
+  "storage": {
+    "rootDirectory": "/var/lib/registry"
   },
-  "http":{
-      "address": "0.0.0.0",
-      "port": "5000",
-      "compat": [ "docker2s2" ]
+  "http": {
+    "address": "0.0.0.0",
+    "port": "5000",
+    "compat": ["docker2s2"]
   },
   "extensions": {
     "search": {
-        "enable": true,
-        "cve": {
-            "updateInterval": "2h"
-        }
+      "enable": true,
+      "cve": {
+        "updateInterval": "2h"
+      }
     },
     "ui": {
-        "enable": true
+      "enable": true
     },
     "mgmt": {
       "enable": true
@@ -24,13 +24,23 @@
       "enable": true,
       "registries": [
         {
-          "urls": [ "https://docker.io/library" ],
-          "onDemand": true
+          "urls": ["https://docker.io/library"],
+          "onDemand": true,
+          "content": [
+            { "prefix": "**", "destination": "/docker" }
+          ]
+        },
+        {
+          "urls": ["https://ghcr.io"],
+          "onDemand": true,
+          "content": [
+            { "prefix": "**", "destination": "/ghcr" }
+          ]
         }
       ]
     }
   },
-  "log":{
-      "level": "debug"
+  "log": {
+    "level": "debug"
   }
 }
