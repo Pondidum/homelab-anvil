@@ -30,6 +30,11 @@
 	handle @miniflux {
 		reverse_proxy http://miniflux:8080
 	}
+
+	@immich host immich.verstas.xyz
+	handle @immich {
+		reverse_proxy http://immich-server:2283
+	}
 }
 
 https://miniflux.koti.sammalmaa.fi {
