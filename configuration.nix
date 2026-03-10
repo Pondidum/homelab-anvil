@@ -190,9 +190,6 @@
           image = "localhost:5000/docker/valkey/valkey:9-alpine3.23";
           autoStart = true;
           ports = [ "127.0.0.1:6379:6379" ];
-          volumes = [
-            "/root/apps/storage/valkey:/cache"
-          ];
           dependsOn = [ "zot" ];
         };
 
@@ -205,6 +202,33 @@
             "/root/apps/miniflux/variables.env"
           ];
           dependsOn = [ "zot" "postgres" ];
+        };
+
+        immich-server = {
+          image = "localhost:5000/ghcr/immich-app/immich-server:v2";
+          autoStart = true;
+          ports = [ "0.0.0.0:2283:2283" ];
+          environmentFiles = [
+            "/root/apps/immich/secrets.env"
+          ];
+          volumes = [
+            "/root/apps/storage/immich/data:/data"
+            "/etc/localtime:/etc/localtime:ro"
+          ];
+          dependsOn = [ "zot" "valkey" "postgres" ];
+        };
+
+        immich-ml = {
+          image = "localhost:5000/ghcr/immich-app/immich-machine-learning:v2";
+          autoStart = true;
+          ports = [ "127.0.0.1:3003:3003"];
+          environmentFiles = [
+            "/root/apps/immich/secrets.env"
+          ];
+          volumes = [
+            "/root/apps/storage/immich/model-cache:/cache"
+          ];
+          dependsOn = [ "zot" "valkey" "postgres" ];
         };
       };
     };
