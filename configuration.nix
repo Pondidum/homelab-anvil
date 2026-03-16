@@ -64,6 +64,7 @@
     pkgs.curl
     pkgs.jq
     pkgs.podman-tui
+    pkgs.rclone
   ];
 
   environment.etc = {
@@ -234,25 +235,51 @@
     };
   };
 
-  systemd.timers."external-dns" = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnBootSec = "5m";
-      OnUnitActiveSec = "15m";
-      Unit = "external-dns";
-    };
-  };
+  systemd = {
 
-  systemd.services."external-dns" = {
-    script = "/bin/sh /root/apps/external-dns/external-dns.sh";
-    path = [
-      pkgs.curl
-      pkgs.jq
-    ];
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      EnvironmentFile = "/root/apps/external-dns/secrets.env";
+    timers = {  
+      "external-dns" = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnBootSec = "5m";
+          OnUnitActiveSec = "15m";
+          Unit = "external-dns";
+        };
+      };
+
+      "file-backup" = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "*-*-* 03:00:00";
+          Unit = "file-backup";
+        };
+      };
+    };
+
+    services = {
+      "external-dns" = {
+        script = "/bin/sh /root/apps/external-dns/external-dns.sh";
+        path = [
+          pkgs.curl
+          pkgs.jq
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+          EnvironmentFile = "/root/apps/external-dns/secrets.env";
+        };
+      };
+
+      "file-backup" = {
+        script = "rclone sync --config '/root/apps/filebackup/rclone.conf' --progress '/root/apps/storage/immich/data' 'owncloud:/backup/anvil/immich'";
+        path = [
+          pkgs.rclone
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+        };
+      };
     };
   };
 
