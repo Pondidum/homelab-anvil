@@ -231,6 +231,16 @@
           ];
           dependsOn = [ "zot" "valkey" "postgres" ];
         };
+
+        forgejo = {
+          image = "localhost:5000/codeberg/forgejo/forgejo:15";
+          autoStart = true;
+          ports = [ "127.0.0.1:3000:3000" ];
+          volumes = [
+            "/root/apps/storage/forgejo/data:/data"
+            "/etc/localtime:/etc/localtime:ro"
+          ];
+        };
       };
     };
   };

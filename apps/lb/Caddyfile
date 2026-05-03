@@ -35,6 +35,11 @@
 	handle @immich {
 		reverse_proxy http://immich-server:2283
 	}
+
+	@forgejo host forge.verstas.xyz
+	handle @forgejo {
+		reverse_proxy http://forgejo:2283
+	}
 }
 
 https://miniflux.koti.sammalmaa.fi {
@@ -43,6 +48,10 @@ https://miniflux.koti.sammalmaa.fi {
 
 https://immich.koti.sammalmaa.fi {
   reverse_proxy http://immich-server:2283
+}
+
+https://forge.koti.sammalmaa.fi {
+  reverse_proxy http://forgejo:3000
 }
 
 https://koti.sammalmaa.fi {
