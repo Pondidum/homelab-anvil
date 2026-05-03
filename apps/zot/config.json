@@ -36,6 +36,13 @@
           "content": [
             { "prefix": "**", "destination": "/ghcr" }
           ]
+        },
+        {
+          "urls": ["https://codeberg.org"],
+          "onDemand": true,
+          "content": [
+            { "prefix": "**", "destination": "/codeberg" }
+          ]
         }
       ]
     }
