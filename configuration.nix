@@ -206,7 +206,7 @@
         };
 
         immich-server = {
-          image = "localhost:5000/ghcr/immich-app/immich-server:v2";
+          image = "localhost:5000/ghcr/immich-app/immich-server:v3";
           autoStart = true;
           ports = [ "0.0.0.0:2283:2283" ];
           environmentFiles = [
@@ -220,7 +220,7 @@
         };
 
         immich-ml = {
-          image = "localhost:5000/ghcr/immich-app/immich-machine-learning:v2";
+          image = "localhost:5000/ghcr/immich-app/immich-machine-learning:v3";
           autoStart = true;
           ports = [ "127.0.0.1:3003:3003"];
           environmentFiles = [
