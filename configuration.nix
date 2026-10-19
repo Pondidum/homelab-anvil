@@ -65,6 +65,7 @@
     pkgs.jq
     pkgs.podman-tui
     pkgs.rclone
+    pkgs.ovhcloud-cli
   ];
 
   environment.etc = {
@@ -272,6 +273,7 @@
         path = [
           pkgs.curl
           pkgs.jq
+          pkgs.ovhcloud-cli
         ];
         serviceConfig = {
           Type = "oneshot";
